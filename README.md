@@ -7,8 +7,6 @@ This Helm Chart is a template for common Kubernetes resource manifests, which sh
 
 The code is provided as-is with no warranties.
 
-[[_TOC_]]
-
 ## Usage
 
 [Helm](https://helm.sh) must be installed to use the charts.
@@ -43,7 +41,7 @@ helm delete my-release
 
 ## Configuration
 
-_See [default values.yaml](https://github.com/groupe-creative/helm-one-chart/blob/main/helm/templates/values.yaml) for more details._
+_See [default values.yaml](https://github.com/groupe-creative/helm-one-chart/blob/main/helm/values.yaml) for more details._
 
 ## Examples
 
