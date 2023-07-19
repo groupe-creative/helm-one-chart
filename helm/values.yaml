@@ -87,20 +87,20 @@ resources:
 # Used to Add Pod ReadinessProbe.
 readinessProbe:
   enabled: false
-  initialDelaySeconds: 100
-  failureThreshold: 3
-  periodSeconds: 10
+  initialDelaySeconds: 1
+  failureThreshold: 5
+  periodSeconds: 5
   httpGet:
-    path: /actuator/health
-    port: 8080
+    path: /
+    port: "{{ .Values.service.containerPort }}"
 
 # Used to Add Pod LivenessProbe.
 livenessProbe:
   enabled: false
-  initialDelaySeconds: 60
-  failureThreshold: 3
+  initialDelaySeconds: 20
+  failureThreshold: 5
   periodSeconds: 10
   httpGet:
-    path: /actuator/health
-    port: 8080
+    path: /
+    port: "{{ .Values.service.containerPort }}"
 
