@@ -1,0 +1,106 @@
+# Default values for helm chart
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# Number of replicas.
+replicaCount: 1
+
+# Used to Add "initContainers".
+initContainers: []
+
+# Docker Images to deploy
+image:
+  # Docker Image Name
+  name: ""
+  # Docker Image Tag
+  tag: ""
+  # Docker Image Pull Policy (IfNotPresent | Always | Never)
+  pullPolicy: IfNotPresent
+
+# Custom Startup Commond
+command: []
+# Custom Startup Commond Arguments
+args: []
+
+# Service to bind with pods
+service:
+  # Service Type
+  type: ClusterIP
+  # Container / Pod port
+  containerPort: 80
+  # Service Port
+  port: 80
+
+# Used to Add configmap.
+# To Mount this ConfigMap As Volume ConfigMap.Name ==> {{ .Release.Name }}
+# Templating is allow in values, see example below
+configmap:
+  enabled: false
+  # data :
+    # spring.datasource.url: {{ .Values.config.databaseUrl }}
+    # log.level: {{ .Values.config.logLevel }}
+
+# Used to Add Environment Variables.
+env: []
+
+# Used to Add "envFrom".
+envFrom: []
+
+# Used to Add volumes.
+volumes: []
+
+# Used to Add volumeMounts.
+volumeMounts: []
+
+# Used to Add an Ingress.
+ingress:
+  # Enable Ingress
+  enabled: false
+  # List hosts to bind with current service
+  hosts: []
+  # - name: your-app.k8s
+
+  # Add annotations on the ingress
+  # annotations:
+  #   cert-manager.io/cluster-issuer: "ca-issuer"
+
+  # Add ingressClassName on the ingress
+  # ingressClassName: nginx
+
+  # Enable TLS
+  # Require Kubernetes Secret from "Option 1" or "Option 2"
+  #  - Option 1 - A Cert Manager to generate Secret automatically with a valid Certificate
+  #  - Option 2 - A Secret with certificate deploy manually - Secret.Name ==> tls-{{ ingress.host.name | replace "." "-" }}-cert
+  tls:
+    enabled: true
+
+# Used to Add Pod Resources.
+resources:
+  enabled: false
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "768Mi"
+    cpu: "500m"
+
+# Used to Add Pod ReadinessProbe.
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 100
+  failureThreshold: 3
+  periodSeconds: 10
+  httpGet:
+    path: /actuator/health
+    port: 8080
+
+# Used to Add Pod LivenessProbe.
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 60
+  failureThreshold: 3
+  periodSeconds: 10
+  httpGet:
+    path: /actuator/health
+    port: 8080
+

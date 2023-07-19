@@ -1,0 +1,11 @@
+# Values to deploy Adminer
+
+# Used to Add container.
+image:
+  name: "busybox"
+  tag: "latest"
+
+# Custom Startup Commond
+command: [ "sleep", "3600" ]
+# Custom Startup Commond Arguments
+# args: []

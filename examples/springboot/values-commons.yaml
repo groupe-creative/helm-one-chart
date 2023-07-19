@@ -1,0 +1,71 @@
+# Values to deploy Adminer
+
+# Used to Add container.
+image:
+  name: "springboot-web-app"
+  tag: "1.0.0"
+
+# Used to Add service.
+service:
+  containerPort: 8080
+  port: 80
+
+# Used to Add configmap.
+configmap:
+  enabled: true
+  data :
+    application.properties: |
+      spring.datasource.url: "{{ .Values.config.databaseUrl }}"
+
+# Used to Add volumes.
+volumes:
+  - name: application.properties
+    configMap:
+      name: "{{ .Release.Name }}"
+      items:
+        - key: application.properties
+          path: application.properties
+
+# Used to Add volumeMounts.
+volumeMounts:
+  - name: application.properties
+    mountPath: "/code/config/application.properties"
+    subPath: application.properties
+
+# Used to Add an Ingress.
+ingress:
+  enabled: true
+  # List hosts to bind with current service
+  # Add annotations on the ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "ca-issuer"
+
+# Used to Add Resources.
+resources:
+  enabled: true
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "768Mi"
+    cpu: "500m"
+
+# Used to Add readinessProbe.
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 100
+  failureThreshold: 3
+  periodSeconds: 10
+  httpGet:
+    path: /actuator/health
+    port: "{{ .Values.service.containerPort }}"
+
+# Used to Add livenessProbe.
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  failureThreshold: 3
+  periodSeconds: 10
+  httpGet:
+    path: /actuator/health
+    port: "{{ .Values.service.containerPort }}"

@@ -1,0 +1,24 @@
+# Values to deploy Adminer
+
+# Docker Images to deploy
+image:
+  name: "adminer"
+  tag: "4.8.1"
+
+# Used to Add service.
+service:
+  containerPort: 8080
+  port: 80
+
+# Used to Add env.
+env:
+  - name: ADMINER_DESIGN
+    value: pepa-linha
+
+# Used to Add an Ingress.
+ingress:
+  enabled: true
+  # List hosts to bind with current service
+  # Add annotations on the ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "ca-issuer"

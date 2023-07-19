@@ -1,0 +1,14 @@
+# Values to deploy SpringBoot App
+config:
+  databaseUrl: "jdbc://mydbtest_host:3306/mydbtest_name"
+
+# Used to Add env.
+env:
+  - name: LOGGING_LEVEL_ROOT
+    value: "TRACE"
+
+# Used to Add an Ingress.
+ingress:
+  # List hosts to bind with current service
+  hosts:
+    - name: springboot.workshop.k8s

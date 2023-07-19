@@ -1,0 +1,7 @@
+# Values to deploy Adminer
+
+# Used to Add an Ingress.
+ingress:
+  # List hosts to bind with current service
+  hosts:
+    - name: adminer-test.workshop.k8s

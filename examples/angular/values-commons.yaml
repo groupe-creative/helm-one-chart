@@ -1,0 +1,80 @@
+# Values to deploy Adminer
+
+# Used to Add container.
+image:
+  name: "angular-web-app"
+  tag: "1.0.0"
+
+# Used to Add service.
+service:
+  containerPort: 80
+  port: 80
+
+# Used to Add configmap.
+configmap:
+  enabled: true
+  data :
+    env.js: |
+      (function (window) {
+        window.__env = window.__env || {};
+        window.__env.version = "{{ .Values.image.tag }}";
+        window.__env.apiUrl = "{{ .Values.config.apiurl }}";
+        window.__env.keycloak = {
+          url: "{{ .Values.config.keycloak.url }}",
+          client_id: "{{ .Values.config.keycloak.client_id }}",
+          realm: "{{ .Values.config.keycloak.realm }}"
+        };
+      }(this));
+
+# Used to Add volumes.
+volumes:
+  - name: env.js
+    configMap:
+      name: "{{ .Release.Name }}"
+      items:
+        - key: env.js
+          path: env.js
+
+# Used to Add volumeMounts.
+volumeMounts:
+  - name: env.js
+    mountPath: "/usr/share/nginx/html/env.js"
+    subPath: env.js
+
+# Used to Add an Ingress.
+ingress:
+  enabled: true
+  # List hosts to bind with current service
+  # Add annotations on the ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "ca-issuer"
+
+# Used to Add Resources.
+resources:
+  enabled: true
+  requests:
+    memory: "64Mi"
+    cpu: "250m"
+  limits:
+    memory: "256Mi"
+    cpu: "500m"
+
+# Used to Add readinessProbe.
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 1
+  failureThreshold: 5
+  periodSeconds: 5
+  httpGet:
+    path: /
+    port: "{{ .Values.service.containerPort }}"
+
+# Used to Add livenessProbe.
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 20
+  failureThreshold: 10
+  periodSeconds: 10
+  httpGet:
+    path: /
+    port: "{{ .Values.service.containerPort }}"

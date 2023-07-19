@@ -1,0 +1,13 @@
+# Values to deploy SpringBoot App
+config:
+  apiurl: "https://myapi.com/workshop/"
+  keycloak:
+    url: "https://sso.groupe.com/auth/"
+    client_id: "workshop"
+    realm: "myrealm"
+
+# Used to Add an Ingress.
+ingress:
+  # List hosts to bind with current service
+  hosts:
+    - name: angular.workshop.k8s

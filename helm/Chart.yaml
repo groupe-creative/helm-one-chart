@@ -1,0 +1,5 @@
+apiVersion: v2
+name: kubernetes-one-chart
+description: A Helm chart template for common Kubernetes resource manifests
+type: application
+version: 0.1.0
