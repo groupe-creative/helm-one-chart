@@ -60,6 +60,16 @@ helm delete my-release
 
 TODO
 
+## Release
+
+To Create a New Release
+
+```bash
+VERSION="0.1.1"
+git tag -a $VERSION -m "Release $VERSION"
+git push origin $VERSION
+```
+
 ## License
 
 <!-- Keep full URL links to repo files because this README syncs from main to gh-pages.  -->
