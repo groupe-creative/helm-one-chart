@@ -40,5 +40,8 @@ helm_test_template () {
       HELM_VALUES_FILES_OPTS="$HELM_VALUES_FILES_OPTS -f $HELM_VALUES_ADDITIONNAL_FILE"
   fi
   # Template Chart With Values
-  helm $HELM_MODE -n $NAMESPACE $NAMESPACE-$TOOLS_NAME-test $HELM_VALUES_FILES_OPTS ./helm
+  rm -rf manifests/$TOOLS_NAME && true
+  mkdir manifests/$TOOLS_NAME
+  helm $HELM_MODE -n $NAMESPACE $NAMESPACE-$TOOLS_NAME-test $HELM_VALUES_FILES_OPTS ./helm --output-dir manifests/$TOOLS_NAME
+  find manifests/$TOOLS_NAME -name '*.yaml' | xargs kubeval --ignore-missing-schemas
 }
