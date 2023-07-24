@@ -15,8 +15,12 @@ Please refer to Helm's [documentation](https://helm.sh/docs/) to get started.
 ## Get Repo Info
 
 ```console
-helm repo add helm-one-chart https://xxxx/xxxx
+# Add Repo
+helm repo add helm-one-chart https://groupe-creative.github.io/helm-one-chart/releases/
 helm repo update
+
+# Search Chart Version
+helm search repo helm-one-chart --versions
 ```
 
 You can then run `helm search repo helm-one-chart` to see the charts.
