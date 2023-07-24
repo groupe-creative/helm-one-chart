@@ -21,8 +21,7 @@ jobs:
         run: |
           tag=${GITHUB_REF/refs\/tags\//}
           echo $tag
-          echo "{tag_version}={tag}" >> $GITHUB_OUTPUT
-          echo "tag_version=$tag_version"
+          echo "tag_version=$tag" >> "$GITHUB_ENV"
 
       - name: Extract chart version
         id: chart_version
@@ -30,8 +29,7 @@ jobs:
           CHART_VERSION=$(cat helm/Chart.yaml | grep ^version:)
           CHART_VERSION=${CHART_VERSION#version: }
           echo $CHART_VERSION
-          echo "{chart_version}={CHART_VERSION}" >> $GITHUB_OUTPUT
-          echo "chart_version=$chart_version"
+          echo "chart_version=$CHART_VERSION" >> "$GITHUB_ENV"
 
       - name: Ensure tag and chart version matches
         run: |
@@ -53,8 +51,8 @@ jobs:
               exit 1
           fi
         env:
-          TAG_VERSION: ${{ steps.versioning.outputs.tag_version }}
-          CHART_VERSION: ${{ steps.chart_version.outputs.chart_version }}
+          TAG_VERSION: ${{ env.tag_version }}
+          CHART_VERSION: ${{ env.chart_version }}
 
       - name: Create Release
         id: create_release
@@ -79,4 +77,5 @@ jobs:
           git commit -m "Publishing $TAG_VERSION to the Helm repository"
           git push origin main
         env:
-          TAG_VERSION: ${{ steps.versioning.outputs.tag_version }}
+          TAG_VERSION: ${{ env.tag_version }}
+          CHART_VERSION: ${{ env.chart_version }}
