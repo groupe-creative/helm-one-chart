@@ -34,12 +34,10 @@ jobs:
       - name: Ensure tag and chart version matches
         run: |
           TAG_VERSION="${{ env.tag_version }}"
-          echo "${{ env.tag_version }}"
-          echo "${TAG_VERSION}"
+          echo "TAG_VERSION=${TAG_VERSION}"
           
           CHART_VERSION="${{ env.chart_version }}"
-          echo "${{ env.chart_version }}"
-          echo "${CHART_VERSION}"
+          echo "${CHART_VERSION=CHART_VERSION}"
           
           if [ -z "${TAG_VERSION}" ]
           then
@@ -56,9 +54,6 @@ jobs:
               echo "Tag version does not match chart version"
               exit 1
           fi
-        env:
-          TAG_VERSION: ${{ env.tag_version }}
-          CHART_VERSION: ${{ env.chart_version }}
 
       - name: Create Release
         id: create_release
@@ -73,6 +68,8 @@ jobs:
 
       - name: Publishing to the Helm repository
         run: |
+          TAG_VERSION="${{ env.tag_version }}"
+          
           git config --global user.email "action@github.com"
           git config --global user.name "Github Action"
           git checkout main
@@ -82,6 +79,3 @@ jobs:
           git add .
           git commit -m "Publishing $TAG_VERSION to the Helm repository"
           git push origin main
-        env:
-          TAG_VERSION: ${{ env.tag_version }}
-          CHART_VERSION: ${{ env.chart_version }}
