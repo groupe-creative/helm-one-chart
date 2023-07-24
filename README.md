@@ -1,7 +1,7 @@
 # Helm One Chart
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Artifact HUB](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/helm-one-chart)](https://artifacthub.io/packages/search?repo=helm-one-chart)
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/helm-one-chart)](https://artifacthub.io/packages/search?repo=helm-one-chart)
 
 This Helm Chart is a template for common Kubernetes resource manifests, which should cover most use cases.
 
