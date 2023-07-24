@@ -7,7 +7,7 @@
 # * ./examples/angular/template.sh dry-run debug
 # * ./examples/angular/template.sh template debug
 
-source ./.platforms/bootstrap.sh
+source ./.github/bootstrap.sh
 
 # Test Template for "adminer"
 helm_test_template "angular"

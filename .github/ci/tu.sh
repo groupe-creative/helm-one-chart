@@ -1,11 +1,11 @@
 #!/bin/bash
 
-# Usage: ./.platforms/ci/tu.sh <template-mode> <debug>
+# Usage: ./.github/ci/tu.sh <template-mode> <debug>
 # Exemples:
-# * ./.platforms/ci/tu.sh
-# * ./.platforms/ci/tu.sh dry-run
-# * ./.platforms/ci/tu.sh dry-run debug
-# * ./.platforms/ci/tu.sh template debug
+# * ./.github/ci/tu.sh
+# * ./.github/ci/tu.sh dry-run
+# * ./.github/ci/tu.sh dry-run debug
+# * ./.github/ci/tu.sh template debug
 
 # Helm Test Mode ("template" | "dry-run")
 HELM_MODE=$1
