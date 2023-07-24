@@ -27,21 +27,6 @@ You can then run `helm search repo helm-one-chart` to see the charts.
 
 _See [helm repo](https://helm.sh/docs/helm/helm_repo/) for command documentation._
 
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```console
-helm install my-release helm-one-chart
-```
-
-## Uninstalling the Chart
-
-To uninstall/delete the my-release deployment:
-
-```console
-helm delete my-release
-```
 
 ## Configuration
 
@@ -51,6 +36,25 @@ _See [default values.yaml](https://github.com/groupe-creative/helm-one-chart/blo
 
 The [examples folder](https://github.com/groupe-creative/helm-one-chart/blob/main/examples/) contains multiples helm values files to test / deploy release to Kubernetes.
 
+## Installing the Chart
+
+To install the chart with the release name `my-release`:
+
+```console
+# Test (Dry Run)
+helm upgrade --install --dry-run my-release -f my-values.yaml helm-one-chart/helm-one-chart
+
+# Install
+helm upgrade --install my-release -f my-values.yaml helm-one-chart/helm-one-chart
+```
+
+## Uninstalling the Chart
+
+To uninstall/delete the my-release deployment:
+
+```console
+helm delete my-release
+```
 
 ## Contributing
 
