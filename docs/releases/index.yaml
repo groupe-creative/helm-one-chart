@@ -2,16 +2,16 @@ apiVersion: v1
 entries:
   helm-one-chart:
   - apiVersion: v2
-    created: "2023-07-24T09:26:28.278054266Z"
+    created: "2023-07-24T09:36:55.13944129Z"
     description: A Helm chart template for common Kubernetes resource manifests
-    digest: 3c98582258e2e216a3d2b007f11fb5b2fc0185dba08b03766e27452f03a063fd
+    digest: c64cd9d4723f036358b5ca6791d76cb4907ab7150d030af7fd2001270a7b9539
     name: helm-one-chart
     type: application
     urls:
     - https://groupe-creative.github.io/helm-one-chart/releases/helm-one-chart-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
-    created: "2023-07-24T09:26:28.277632061Z"
+    created: "2023-07-24T09:36:55.138988988Z"
     description: A Helm chart template for common Kubernetes resource manifests
     digest: 17b4e4cc5ee7e7567e1567918c4e8e3968664c70fe52402c9470b76eda3389ef
     name: helm-one-chart
@@ -19,4 +19,4 @@ entries:
     urls:
     - https://groupe-creative.github.io/helm-one-chart/releases/helm-one-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-07-24T09:26:28.276532448Z"
+generated: "2023-07-24T09:36:55.138369285Z"
