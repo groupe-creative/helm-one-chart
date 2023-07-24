@@ -20,7 +20,8 @@ jobs:
         id: versioning
         run: |
           tag=${GITHUB_REF/refs\/tags\//}
-          echo "{tag_version}=$tag" >> $GITHUB_OUTPUT
+          echo $tag
+          echo "{tag_version}={tag}" >> $GITHUB_OUTPUT
 
       - name: Extract chart version
         id: chart_version
@@ -28,7 +29,7 @@ jobs:
           CHART_VERSION=$(cat helm/Chart.yaml | grep ^version:)
           CHART_VERSION=${CHART_VERSION#version: }
           echo $CHART_VERSION
-          echo "{chart_version}=$CHART_VERSION" >> $GITHUB_OUTPUT
+          echo "{chart_version}={CHART_VERSION}" >> $GITHUB_OUTPUT
 
       - name: Ensure tag and chart version matches
         run: |
