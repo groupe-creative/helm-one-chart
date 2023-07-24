@@ -33,8 +33,14 @@ jobs:
 
       - name: Ensure tag and chart version matches
         run: |
-          echo "$TAG_VERSION"
-          echo "$CHART_VERSION"
+          TAG_VERSION="${{ env.tag_version }}"
+          echo "${{ env.tag_version }}"
+          echo "${TAG_VERSION}"
+          
+          CHART_VERSION="${{ env.chart_version }}"
+          echo "${{ env.chart_version }}"
+          echo "${CHART_VERSION}"
+          
           if [ -z "${TAG_VERSION}" ]
           then
               echo "Tag version is empty"
