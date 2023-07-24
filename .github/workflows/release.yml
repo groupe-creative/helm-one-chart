@@ -22,6 +22,7 @@ jobs:
           tag=${GITHUB_REF/refs\/tags\//}
           echo $tag
           echo "{tag_version}={tag}" >> $GITHUB_OUTPUT
+          echo "tag_version=$tag_version"
 
       - name: Extract chart version
         id: chart_version
@@ -30,11 +31,22 @@ jobs:
           CHART_VERSION=${CHART_VERSION#version: }
           echo $CHART_VERSION
           echo "{chart_version}={CHART_VERSION}" >> $GITHUB_OUTPUT
+          echo "chart_version=$chart_version"
 
       - name: Ensure tag and chart version matches
         run: |
           echo "$TAG_VERSION"
           echo "$CHART_VERSION"
+          if [ -z "${TAG_VERSION}" ]
+          then
+              echo "Tag version is empty"
+              exit 1
+          fi
+          if [ -z "${CHART_VERSION}" ]
+          then
+              echo "Chart version is empty"
+              exit 1
+          fi
           if [ "$TAG_VERSION" != "$CHART_VERSION" ]
           then
               echo "Tag version does not match chart version"
